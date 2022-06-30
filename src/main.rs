@@ -20,55 +20,33 @@ async fn main() {
         ..Default::default()
       },
     );
-
     if is_key_down(KeyCode::LeftShift) || is_key_down(KeyCode::RightShift) {
       shift_pressed = 2.;
-      println!("{}", is_key_down(KeyCode::LeftShift));
     } else {
       shift_pressed = 1.;
-      println!("{}", is_key_down(KeyCode::LeftShift));
+    }
+    if w < 48. * 2. {
+      w += 48.;
+    } else {
+      w = 0.
     }
     if is_key_down(KeyCode::W) {
       y -= 5. * shift_pressed;
       h = 0.;
-      if w < 48. * 2. {
-        w += 48.;
-      } else {
-        w = 0.
-      }
-      std::thread::sleep(std::time::Duration::from_millis(100));
     } else if is_key_down(KeyCode::A) {
       x -= 5. * shift_pressed;
       h = 64. * 3.;
-      if w < 48. * 2. {
-        w += 48.;
-      } else {
-        w = 0.
-      }
-      std::thread::sleep(std::time::Duration::from_millis(100));
     } else if is_key_down(KeyCode::S) {
       y += 5. * shift_pressed;
       h = 64. * 2.;
-      if w < 48. * 2. {
-        w += 48.;
-      } else {
-        w = 0.
-      }
-      std::thread::sleep(std::time::Duration::from_millis(100));
     } else if is_key_down(KeyCode::D) {
       x += 5. * shift_pressed;
       h = 64. * 1.;
-      if w < 48. * 2. {
-        w += 48.;
-      } else {
-        w = 0.
-      }
-      std::thread::sleep(std::time::Duration::from_millis(100));
     } else {
       h = 64. * 2.;
       w = 48. * 1.
     }
-    println!("{}", get_fps());
-    next_frame().await
+    next_frame().await;
+    std::thread::sleep(std::time::Duration::from_millis(50));
   }
 }
